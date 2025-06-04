@@ -144,13 +144,13 @@ export const TodoList = () => {
 				<h1 className='text-center text-primary'>Todo List with Fetch</h1>
 				{isEdit ? (
 					<form onSubmit={handleSubmitEdit} >
-						<div className="bg-warning rounded p-4">
+						<div className="bg-warning-subtle rounded p-4">
 							<div className="col-12 col-md-10 col-lg-8 d-flex flex-column">
-								<label>Edit Task</label>
+								<label className="mb-2 fw-bold">Edit Task</label>
 								<input onChange={handleEditTask} type="text" value={editTask} className="form-control" />
 								<div className="d-flex mt-2 gap-4">
-									<input type="checkbox" checked={editTaskCompleted} onChange={handleEditTaskCompleted} />
-									<label>Completed</label>
+									<input type="checkbox" id="taskCompleted" checked={editTaskCompleted} onChange={handleEditTaskCompleted} />
+									<label htmlFor="taskCompleted" className="form-check-label">Completed</label>
 								</div>
 								<div className="d-flex mt-3 gap-5">
 									<button type="submit" className="btn btn-primary">Submit</button>
@@ -163,8 +163,8 @@ export const TodoList = () => {
 					<form onSubmit={handleAddTask}>
 						<div className="bg-warning rounded p-4">
 							<div className="col-12 col-md-10 col-lg-8 d-flex flex-column">
-								<label>Add Task</label>
-								<input onChange={handleNewTask} type="text" value={newTask} className="form-control" />
+								<label className="mb-2 fw-bold">Add Task</label>
+								<input onChange={handleNewTask} type="text" value={newTask} className="form-control" placeholder="Añade una tarea"/>
 							</div>
 						</div>
 					</form>
@@ -175,12 +175,12 @@ export const TodoList = () => {
 				<div className="col-12 col-md-10 col-lg-8 col-xl-6 bg-dark rounded p-3">
 					<ul className="list-group">
 						{todos.length === 0 ? (
-							<li className="list-group-item text-end">No tienes ninguna tarea.</li>
+							<li className="list-group-item text-end bg-dark text-light">No tienes ninguna tarea.</li>
 						) : (
 							<>
 								{
 									todos.map(todo => (
-										<li key={todo.id} className="list-group-item d-flex justify-content-between">
+										<li key={todo.id} className="list-group-item d-flex justify-content-between align-items-center">
 											<div className="me-3">
 												{todo.is_done ? (
 													<i className="fa-solid fa-thumbs-up text-success"></i>
@@ -189,14 +189,14 @@ export const TodoList = () => {
 												)}
 											</div>
 											<span className={todo.is_done ? "text-decoration-line-through text-danger" : ""}>{todo.label}</span>
-											<div className="d-flex ms-3 gap-2">
+											<div className="d-flex ms-3 gap-3">
 												<i onClick={() => handleEditIcon(todo)} className="fa-solid fa-pen-to-square text-success cursor-pointer" style={{ cursor: "pointer" }}></i>
 												<i onClick={() => handleDeletTask(todo.id)} className="fa-solid fa-trash text-danger" style={{ cursor: "pointer" }}></i>
 											</div>
 										</li>
 									))
 								}
-								< li className="list-group-item text-end">
+								< li className="list-group-item text-end bg-dark text-light">
 									<span>
 										{todos.filter(todo => !todo.is_done).length === 1 ? (
 											`Hay ${todos.filter(todo => !todo.is_done).length} tarea pendiente`
